@@ -20,6 +20,10 @@ for live laravel mix
 npm run watch
 ```
 
+```
+php artisan route:list --name="question.index"
+```
+
 ## Example codes 
 best query with relationship models in method in  `SomeController.php`
 ```
