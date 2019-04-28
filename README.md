@@ -15,6 +15,11 @@ php artisan vendor:publish --tag=laravel-pagination
 composer require barryvdh/laravel-debugbar --dev
 ```
 
+for live laravel mix
+```
+npm run watch
+```
+
 ## Example codes 
 best query with relationship models in method in  `SomeController.php`
 ```
