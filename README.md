@@ -24,6 +24,11 @@ npm run watch
 php artisan route:list --name="question.index"
 ```
 
+
+```
+php artisan make:policy QuestionPolicy --model=Question
+```
+
 ## Example codes 
 best query with relationship models in method in  `SomeController.php`
 ```
