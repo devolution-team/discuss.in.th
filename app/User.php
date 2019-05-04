@@ -20,6 +20,11 @@ class User extends Authenticatable
         return $this->hasMany(Answer::class);
     }
 
+    public function favorites()
+    {
+        return $this->belongsToMany(Question::class, 'favorites')->withTimestamps(); //, 'author_id', 'question_id');
+    }
+
     public function getUrlAttribute()
     {
         // return route('question.show', $this->id);
