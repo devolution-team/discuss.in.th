@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use App\Question;
-use App\Prolicies\QuestionPolicy;
+use App\Policies\QuestionPolicy;
 use App\Answer;
 use App\Policies\AnswerPolicy;
 use Illuminate\Support\Facades\Gate;
