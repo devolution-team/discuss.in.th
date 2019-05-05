@@ -1,5 +1,7 @@
 # Discuss.in.th
 
+> In software engineering, **Don't Repeat Yourself (DRY)** is a principle of software development aimed at reducing repetition of software patterns, replacing it with abstractions, of repetition of the same data, using data normalization to avoid redundancy.
+
 
 ## Useful commands
 
