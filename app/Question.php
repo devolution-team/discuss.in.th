@@ -10,6 +10,7 @@ class Question extends Model
 
     protected $fillable = ['title', 'body'];
 
+
     /**
      * Relationship methods
      */
@@ -24,6 +25,11 @@ class Question extends Model
         return $this->hasMany(Answer::class);
     }
 
+    public function favorites()
+    {
+        return $this->belongsToMany(User::class, 'favorites')->withTimestamps(); //, 'question_id', 'arthor_id');
+    }
+
 
     /** 
      * Attribute methods
@@ -34,6 +40,11 @@ class Question extends Model
         $this->attributes['title'] = $value;
         $this->attributes['slug'] = str_slug($value);
     }
+
+    // public function setBodyAttribute($value)
+    // {
+    //     $this->attributes['body'] = clean($value);
+    // }
 
     public function getUrlAttribute()
     {
@@ -57,20 +68,9 @@ class Question extends Model
         return "unanswered";
     }
 
-    public function acceptBestAnswer(Answer $answer)
+    public function getExcerptAttribute()
     {
-        $this->best_answer_id = $answer->id;
-        $this->save();
-    }
-
-    public function favorites()
-    {
-        return $this->belongsToMany(User::class, 'favorites')->withTimestamps(); //, 'question_id', 'arthor_id');
-    }
-
-    public function isFavorited()
-    {
-        return $this->favorites()->where('user_id', auth()->id())->count() > 0;
+        return $this->excerpt(250);
     }
 
     public function getIsFavoritedAttribute()
@@ -85,12 +85,33 @@ class Question extends Model
 
     public function getBodyHtmlAttribute()
     {
-        return \Parsedown::instance()->text($this->body);
+        return clean($this->bodyHtml());
     }
 
 
     /**
      * Action methods
      */
+
+    private function bodyHtml()
+    {
+        return \Parsedown::instance()->text($this->body);
+    }
+
+    public function excerpt($length)
+    {
+        return str_limit(strip_tags($this->bodyHtml()), $length);
+    }
+
+    public function isFavorited()
+    {
+        return $this->favorites()->where('user_id', auth()->id())->count() > 0;
+    }
+
+    public function acceptBestAnswer(Answer $answer)
+    {
+        $this->best_answer_id = $answer->id;
+        $this->save();
+    }
 
 }
