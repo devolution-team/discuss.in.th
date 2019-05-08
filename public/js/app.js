@@ -1769,6 +1769,9 @@ __webpack_require__.r(__webpack_exports__);
     return {
       editing: false
     };
+  },
+  methods: {
+    editing: {}
   }
 });
 
@@ -49288,7 +49291,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
 Vue.component('user-info', __webpack_require__(/*! ./components/UserInfo.vue */ "./resources/js/components/UserInfo.vue"));
-Vue.component('answer', __webpack_require__(/*! ./components/Answer.vue */ "./resources/js/components/Answer.vue"));
+Vue.component('Answer', __webpack_require__(/*! ./components/Answer.vue */ "./resources/js/components/Answer.vue"));
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

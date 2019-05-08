@@ -6,6 +6,11 @@ export default {
         return {
             editing: false
         }
+    },
+    methods: {
+        editing: {
+            
+        }
     }
 }
 </script>
