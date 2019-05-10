@@ -1767,11 +1767,41 @@ __webpack_require__.r(__webpack_exports__);
   props: ['answer'],
   data: function data() {
     return {
-      editing: false
+      editing: false,
+      body: this.answer.body,
+      bodyHtml: this.answer.body_html,
+      id: this.answer.id,
+      questionId: this.answer.question_id,
+      beforeEditCache: null
     };
   },
   methods: {
-    editing: {}
+    edit: function edit() {
+      this.beforeEditCache = this.body;
+      this.editing = true;
+    },
+    cancel: function cancel() {
+      this.body = this.beforeEditCache;
+      this.editing = false;
+    },
+    update: function update() {
+      var _this = this;
+
+      axios.patch("/questions/".concat(this.questionId, "/answers/").concat(this.id), {
+        body: this.body
+      }).then(function (res) {
+        _this.editing = false;
+        _this.bodyHtml = res.data.body_html;
+        alert(res.data.message);
+      })["catch"](function (err) {
+        alert(err.response.data.message);
+      });
+    }
+  },
+  computed: {
+    isInvalid: function isInvalid() {
+      return this.body.length < 10;
+    }
   }
 });
 
@@ -49291,7 +49321,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
 Vue.component('user-info', __webpack_require__(/*! ./components/UserInfo.vue */ "./resources/js/components/UserInfo.vue"));
-Vue.component('Answer', __webpack_require__(/*! ./components/Answer.vue */ "./resources/js/components/Answer.vue"));
+Vue.component('answer', __webpack_require__(/*! ./components/Answer.vue */ "./resources/js/components/Answer.vue"));
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
